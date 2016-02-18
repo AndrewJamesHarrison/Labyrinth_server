@@ -36,9 +36,13 @@ function onSocketConnection(client) {
 
 function onClientDisconnect() {
     console.log("Player has disconnected: "+this.id);
-	this.broadcast.emit('remove player', {id: this.id});
-	var r=playerById(this.id);
-	players.splice(r, 1);
+	
+	var r=-1;
+	r=playerById(this.id);
+	if(r!=-1){
+		this.broadcast.emit('remove player', {id: this.id});
+		players.splice(r, 1);
+	}
 }
 
 function onNewPlayer(data) {
