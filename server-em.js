@@ -32,6 +32,12 @@ function onSocketConnection(client) {
     client.on("disconnect", onClientDisconnect);
     client.on("new player", onNewPlayer);
     client.on("move player", onMovePlayer);
+	client.on("player wins", onWinPlayer);
+}
+
+function onWinPlayer(data) {
+	console.log('You win, '+data);
+	init();
 }
 
 function onClientDisconnect() {
@@ -71,11 +77,11 @@ function onMovePlayer(data) {
   }
 
   // Update player position
-  //movePlayer.setX(data.x);
-  //movePlayer.setY(data.y);
+  players[movePlayer].setX(data.x);
+  players[movePlayer].setY(data.y);
 
   // Broadcast updated position to connected socket clients
-  this.broadcast.emit('move player', {id: this.id, x: data.x, y: data.y});
+  this.broadcast.emit('move player', {id: this.id, x: players[movePlayer].x, y: players[movePlayer].y});
 }
 
 function playerById (id) {

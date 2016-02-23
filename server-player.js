@@ -1,8 +1,10 @@
 var Player = function(startX, startY) {
-    var x = startX,
-        y = startY,
-        id;
-    
+    var x = startX;
+    var y = startY;
+    var id;
+    //alive?
+	//win?
+	
     var getX = function() {
         return x;
     };
